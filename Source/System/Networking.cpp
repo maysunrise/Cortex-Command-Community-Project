@@ -59,14 +59,14 @@ void Networking::StartGame(int mode) {
 		IsHost = true;
 		p_Server = new NetworkServer();
 		p_Server->Create(7777);
-		/*
+		
 		std::thread serverThread([this]() {
 			while (p_Server) {
 				p_Server->UpdateRecieved();
 			}
 		});
 		serverThread.detach();
-		*/
+		
 		// Since the host is also a player, we create a client
 		p_Client = new NetworkClient();
 		p_Client->Connect("127.0.0.1", 7777);
@@ -78,10 +78,10 @@ void Networking::StartGame(int mode) {
 }
 
 void Networking::Update() {
-	if (!p_Server) {
+	if (p_Server) {
 		p_Server->Update();
 	}
-	if (!p_Client) {
+	if (p_Client) {
 		p_Client->Update();
 	}
 	//g_ConsoleMan.PrintString("Server active: " + m_Server->IsActive());

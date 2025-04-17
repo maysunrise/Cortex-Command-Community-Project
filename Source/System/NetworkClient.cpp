@@ -11,18 +11,16 @@ void NetworkClient::Connect(std::string ip, int port) {
 
 	p_EnetClient = enet_host_create(NULL, 1, 2, 0, 0);
 
-	enet_address_set_host(&address, ip.c_str());
-
-	p_EnetPeer = enet_host_connect(p_EnetClient, &address, 2, 0);
-
 	if (p_EnetClient == NULL) {
 		Log("An error occurred while trying to create an ENet client host");
 		return;
 	} else {
-		Log("Started client!");
+		//Log("Started client!");
 	}
 
-	UpdateRecieved();
+	enet_address_set_host(&address, ip.c_str());
+	p_EnetPeer = enet_host_connect(p_EnetClient, &address, 2, 0);
+	UpdateRecieved(1000);
 	/*
 	ENetEvent netEvent;
 	if (enet_host_service(p_EnetClient, &netEvent, 3000) > 0) {
@@ -43,11 +41,12 @@ void NetworkClient::Update() {
 	UpdateRecieved();
 }
 
-void NetworkClient::UpdateRecieved() {
+void NetworkClient::UpdateRecieved(int delay) {
 	ENetEvent netEvent;
-	if (enet_host_service(p_EnetClient, &netEvent, 0) > 0) {
+	if (enet_host_service(p_EnetClient, &netEvent, delay) > 0) {
 		switch (netEvent.type) {
 			case ENET_EVENT_TYPE_CONNECT:
+				Connected = true;
 				Log("Connected to the server!");
 				break;
 			case ENET_EVENT_TYPE_RECEIVE:
@@ -55,6 +54,7 @@ void NetworkClient::UpdateRecieved() {
 			case ENET_EVENT_TYPE_DISCONNECT_TIMEOUT:
 			case ENET_EVENT_TYPE_DISCONNECT:
 				Log("Can't connect to the server!");
+				Connected = false;
 				g_Networking.Destroy();
 				break;
 		}

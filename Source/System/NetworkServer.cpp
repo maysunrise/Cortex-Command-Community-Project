@@ -2,6 +2,8 @@
 
 #include "NetworkServer.h"
 #include <ConsoleMan.h>
+#include <queue>
+
 
 using namespace RTE;
 
@@ -22,13 +24,13 @@ void NetworkServer::Create(enet_uint32 port) {
 }
 
 void NetworkServer::Update() {
-	UpdateRecieved();
+	ProcessEvents();
 }
 
-// Processing packets
-void NetworkServer::UpdateRecieved() {
-	ENetEvent netEvent;
-	if (enet_host_service(p_EnetServer, &netEvent, 0) > 0){
+void NetworkServer::ProcessEvents() {
+	for (; !m_NetEvents.empty(); m_NetEvents.pop()){
+		ENetEvent netEvent = m_NetEvents.front();
+
 		switch (netEvent.type) {
 			case ENET_EVENT_TYPE_CONNECT:
 				Log("Someone connected!");
@@ -37,9 +39,17 @@ void NetworkServer::UpdateRecieved() {
 				break;
 			case ENET_EVENT_TYPE_DISCONNECT_TIMEOUT:
 			case ENET_EVENT_TYPE_DISCONNECT:
-				Log("Someone disconnected!");
+				Log("Someone disconnected.");
 				break;
 		}
+	}
+}
+
+// Processing packets
+void NetworkServer::UpdateRecieved() {
+	ENetEvent netEvent;
+	if (enet_host_service(p_EnetServer, &netEvent, 30) > 0){
+		m_NetEvents.push(netEvent);
 	}
 }
 
