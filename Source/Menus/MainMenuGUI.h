@@ -5,6 +5,7 @@
 #include "SaveLoadMenuGUI.h"
 #include "SettingsGUI.h"
 #include "ModManagerGUI.h"
+#include "MultiplayerGameGUI.h"
 
 namespace RTE {
 
@@ -67,6 +68,7 @@ namespace RTE {
 			EditorScreen,
 			CreditsScreen,
 			QuitScreen,
+			MultiplayerScreen,
 			ScreenCount
 		};
 
@@ -113,6 +115,7 @@ namespace RTE {
 		std::unique_ptr<SaveLoadMenuGUI> m_SaveLoadMenu; //!< The save/load menu screen.
 		std::unique_ptr<SettingsGUI> m_SettingsMenu; //!< The settings menu screen.
 		std::unique_ptr<ModManagerGUI> m_ModManagerMenu; //!< The mod manager menu screen.
+		std::unique_ptr<MultiplayerGameGUI> m_MultiplayerMenu; //!< The multiplayer menu screen
 
 		// TODO: Rework this hacky garbage implementation when setting button font at runtime without loading a different skin is fixed. Would eliminate the need for a second GUIControlManager as well.
 		// Right now the way this works is the font graphic has different character visuals for uppercase and lowercase and the visual change happens by applying the appropriate case string when hovering/unhovering.
@@ -143,6 +146,9 @@ namespace RTE {
 
 		/// Creates all the elements that compose the quit confirmation menu screen.
 		void CreateQuitScreen();
+
+		/// Creates all the elements that compose the multiplayer menu screen.
+		void CreateMultiplayerScreen();
 #pragma endregion
 
 #pragma region Menu Screen Handling
@@ -156,6 +162,9 @@ namespace RTE {
 
 		/// Makes the main menu screen visible to be interacted with by the player.
 		void ShowMainScreen();
+
+		/// Makes the multiplayer menu screen visible to be interacted with by the player
+		void ShowMultiplayerScreen();
 
 		/// Makes the MetaGame notice menu screen visible to be interacted with by the player.
 		void ShowMetaGameNoticeScreen();

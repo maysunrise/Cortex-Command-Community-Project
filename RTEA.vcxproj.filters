@@ -468,9 +468,6 @@
     <ClInclude Include="Source\Entities\Round.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\NetworkMessages.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\System\InputScheme.h">
       <Filter>System</Filter>
     </ClInclude>
@@ -640,6 +637,13 @@
     </ClInclude>
     <ClInclude Include="Source\Renderer\raylib\rlutils.h">
       <Filter>Renderer\raylib</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\raylib\rlutil.h" />
+    <ClInclude Include="Source\Menus\MultiplayerGameGUI.h">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Networking.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1224,6 +1228,12 @@
     </ClCompile>
     <ClCompile Include="Source\Renderer\raylib\rtextures.c">
       <Filter>Renderer\raylib</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Menus\MultiplayerGameGUI.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Networking.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

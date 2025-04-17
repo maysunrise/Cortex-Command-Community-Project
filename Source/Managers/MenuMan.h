@@ -42,6 +42,9 @@ namespace RTE {
 
 		/// Draws the MenuMan to the screen.
 		void Draw() const;
+
+		// Resuming the actvitity and hides the menu by changing a state
+		void ForceResumeGame();
 #pragma endregion
 
 	private:

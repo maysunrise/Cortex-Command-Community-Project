@@ -194,6 +194,11 @@ bool MenuMan::UpdateMainMenu() const {
 	return false;
 }
 
+void MenuMan::ForceResumeGame() {
+	m_TitleScreen->SetTitleTransitionState(TitleScreen::TitleTransition::TransitionEnd);
+	g_ActivityMan.SetResumeActivity();
+}
+
 void MenuMan::UpdateScenarioMenu() const {
 	switch (m_ScenarioMenu->Update()) {
 		case ScenarioGUI::ScenarioMenuUpdateResult::BackToMain:

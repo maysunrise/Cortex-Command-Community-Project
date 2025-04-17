@@ -241,11 +241,9 @@ allegro_dep = dependency('allegro')
 loadpng_dep = dependency('loadpng')
 luabind_proj = subproject('luabind-0.7.1')
 luabind_dep = dependency('luabind')
-raknet_proj = subproject('RakNet')
-raknet_dep = dependency('RakNet')
 tracy_proj = subproject('tracy')
 tracy_dep = dependency('tracy')
-deps += [allegro_dep, luajit_dep, loadpng_dep, raknet_dep, boost_dep, tracy_dep]
+deps += [allegro_dep, luajit_dep, loadpng_dep, boost_dep, tracy_dep]
 
 #### Sources Setup ####
 source_inc_dirs = []

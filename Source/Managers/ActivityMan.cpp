@@ -24,6 +24,7 @@
 #include "AssemblyEditor.h"
 
 #include "MusicMan.h"
+#include <Networking.h>
 
 using namespace RTE;
 
@@ -390,6 +391,9 @@ void ActivityMan::LateUpdateGlobalScripts() const {
 void ActivityMan::Update() {
 	g_PerformanceMan.StartPerformanceMeasurement(PerformanceMan::ActivityUpdate);
 	if (m_Activity) {
+		// Updating multiplayer core
+		g_Networking.Update();
+
 		m_Activity->Update();
 	}
 	g_PerformanceMan.StopPerformanceMeasurement(PerformanceMan::ActivityUpdate);

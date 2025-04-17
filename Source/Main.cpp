@@ -52,6 +52,7 @@
 #include "LuaMan.h"
 #include "MusicMan.h"
 #include "System.h"
+#include <Networking.h>
 
 #include "RenderTarget.h"
 #include "tracy/Tracy.hpp"
@@ -122,6 +123,8 @@ void InitializeManagers() {
 	if (g_SettingsMan.SettingsNeedOverwrite()) {
 		g_SettingsMan.UpdateSettingsFile();
 	}
+
+	Networking::Construct();
 }
 
 /// <summary>
